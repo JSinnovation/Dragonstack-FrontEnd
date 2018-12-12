@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { generationActionCreator } from '../actions/generation';
+import { fetchGeneration } from '../actions/generation';
+import fetchStates from '../reducers/fetchStates';
 
 const MINIMUM_DELAY = 3000;
 
@@ -42,6 +43,9 @@ class Generation extends Component {
     console.log('this.props', this.props);
     const { generation } = this.props;
 
+    if (generation.status === fetchStates.error) {
+      return <div>{generation.message}</div>;
+    }
     return (
       <div>
         {' '}
@@ -65,17 +69,6 @@ const mapStateToProps = state => {
 }; */
 //The first arrow function is responsible for the mapping of dispatch to props and the second arrow function is responsible for passing the dispatch from the redux store
 //the dispatch function
-const fetchGeneration = ()=> dispatch => {
-    return fetch('http://localhost:3003/generation')
-        .then(response => response.json())
-        .then(json => {
-            dispatch(generationActionCreator(json.generation))
-        })
-        .catch(error => console.error('error',error));
-};
-
-
-
 
 const componentConnector = connect(
     mapStateToProps,

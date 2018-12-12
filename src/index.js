@@ -5,11 +5,11 @@ import { render } from 'react-dom';
 import thunk from 'redux-thunk';
 import Generation from './components/Generation';
 import Dragon from './components/Dragon';
-import {generationReducer} from './reducers';
+import rootReducer from './reducers';
 // import {generationActionCreator} from './actions/generation';
 import './index.css';
 
-const store = createStore(generationReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 applyMiddleware(thunk)
 );
 // store.subscribe(() => console.log('store state update', store.getState()));
